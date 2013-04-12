@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>Morse.js</title>
+</head>
+<body>
+
+  <ol>
+    <li>SOS (<span class="to-morse">SOS</span>)</li>
+    <li>SMS (<span class="to-morse">SMS</span>)</li>
+    <li>I have a ham radio (<span class="to-morse">I have a ham radio</span>)</li>
+  </ol>
+
+  <ol>
+    <li>... --- ... (<span class="from-morse">... --- ...</span>)</li>
+    <li>... -- ... (<span class="from-morse">... -- ...</span>)</li>
+    <li>.. .... .- ...- . .- .... .- -- .-. .- -.. .. --- (<span class="from-morse">..  .... .- ...- .  .-  .... .- --  .-. .- -.. .. ---</span>)</li>
+  </ol>
+
+  <script src="morse.js"></script>
+  <script>
+    Morse.encode('.to-morse');
+    Morse.decode('.from-morse');
+  </script>
+</body>
+</html>
