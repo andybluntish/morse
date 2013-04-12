@@ -3,9 +3,14 @@
  * Convert text to and from morse code
  */
 
-var Morse = {
-  encode: function(selector) {
-    var lookup = {
+// Plugin template - http://jqueryboilerplate.com
+
+// Morsify
+;(function ( $, window, document, undefined ) {
+
+  var pluginName = "morsify",
+      defaults = {
+        lookup: {
           'a': '.-',
           'b': '-...',
           'c': '-.-.',
@@ -43,28 +48,51 @@ var Morse = {
           '9': '----.',
           '0': '-----',
           ' ': ''
-        },
-        elements = document.querySelectorAll(selector),
-        length = elements.length, i, j;
+        }
+      };
 
-    for ( i = 0; i < length; ++i ) {
-      var el = elements[i],
-          original = el.innerHTML,
+  function Plugin( element, options ) {
+    this.element = element;
+    this.$element = $(this.element);
+    this.options = $.extend( {}, defaults, options );
+    this._defaults = defaults;
+    this._name = pluginName;
+    this.init();
+  }
+
+  Plugin.prototype = {
+    init: function() {
+      var original = this.$element.html(),
           encoded = [],
           chars = original.toLowerCase().split(''),
           len = chars.length;
 
       for ( j = 0; j < len; j++ ) {
-        encoded.push(lookup[chars[j]]);
+        encoded.push(this.options.lookup[chars[j]]);
       }
 
-      el.innerHTML = encoded.join(' ');
-      el.setAttribute( 'data-original-value', original );
+      this.$element.html(encoded.join(' ')).attr( 'data-original-value', original );
     }
-  },
+  };
 
-  decode: function(selector) {
-    var lookup = {
+  $.fn[pluginName] = function ( options ) {
+    return this.each(function () {
+      if (!$.data(this, "plugin_" + pluginName)) {
+        $.data(this, "plugin_" + pluginName, new Plugin( this, options ));
+      }
+    });
+  };
+
+})( jQuery, window, document );
+
+
+
+// Demorsify
+;(function ( $, window, document, undefined ) {
+
+  var pluginName = "demorsify",
+      defaults = {
+        lookup: {
           '.-': 'a',
           '-...': 'b',
           '-.-.': 'c',
@@ -102,23 +130,39 @@ var Morse = {
           '----.': '9',
           '-----': '0',
           '': ' '
-        },
-        elements = document.querySelectorAll(selector),
-        length = elements.length, i, j;
+        }
+      };
 
-    for ( i = 0; i < length; ++i ) {
-      var el = elements[i],
-          original = el.innerHTML,
+  function Plugin( element, options ) {
+    this.element = element;
+    this.$element = $(this.element);
+    this.options = $.extend( {}, defaults, options );
+    this._defaults = defaults;
+    this._name = pluginName;
+    this.init();
+  }
+
+  Plugin.prototype = {
+    init: function() {
+      var original = this.$element.html(),
           decoded = [],
           chars = original.toLowerCase().split(' '),
           len = chars.length;
 
       for ( j = 0; j < len; j++ ) {
-        decoded.push(lookup[chars[j]]);
+        decoded.push(this.options.lookup[chars[j]]);
       }
 
-      el.innerHTML = decoded.join('');
-      el.setAttribute( 'data-original-value', original );
+      this.$element.html(decoded.join('')).attr( 'data-original-value', original );
     }
-  }
-};
+  };
+
+  $.fn[pluginName] = function ( options ) {
+    return this.each(function () {
+      if (!$.data(this, "plugin_" + pluginName)) {
+        $.data(this, "plugin_" + pluginName, new Plugin( this, options ));
+      }
+    });
+  };
+
+})( jQuery, window, document );
