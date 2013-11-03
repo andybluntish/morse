@@ -5,6 +5,9 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    config: {
+      name: 'morse'
+    },
 
     jshint: {
       options: {
@@ -17,6 +20,16 @@ module.exports = function(grunt) {
       ]
     },
 
+    browserify: {
+      build: {
+        src: 'lib/index.js',
+        dest: 'build/<%= config.name %>.js'
+      },
+      options: {
+        standalone: '<%= config.name %>'
+      }
+    },
+
     watch: {
       options: {
         livereload: true
@@ -26,7 +39,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['lib/**/*.js'],
-        tasks: ['uglify'],
+        tasks: ['build']
       }
     },
 
@@ -44,14 +57,15 @@ module.exports = function(grunt) {
 
     uglify: {
       build: {
-        src: 'lib/index.js',
-        dest: 'build/<%= pkg.name %>.min.js'
+        src: 'build/<%= config.name %>.js',
+        dest: 'build/<%= config.name %>.min.js'
       }
     }
 
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -59,10 +73,17 @@ module.exports = function(grunt) {
   // Build
   grunt.registerTask('build', [
     'jshint',
+    'browserify:build',
     'uglify'
+  ]);
+
+  // Server
+  grunt.registerTask('server', [
+    'build',
+    'connect',
+    'watch'
   ]);
 
   // Default task.
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('server', ['build', 'connect', 'watch']);
 };
