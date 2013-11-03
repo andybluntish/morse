@@ -16,6 +16,8 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'lib/**/*.js',
+        'examples/**/*.js',
+        '!examples/scripts/vendor/**/*.js',
         'test/spec/**/*.js'
       ]
     },
