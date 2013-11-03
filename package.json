@@ -31,5 +31,14 @@
   ],
   "bugs": {
     "url": "https://github.com/andybluntish/morse/issues"
-  }
+  },
+  "keywords": [
+    "morse code",
+    "morse",
+    "code",
+    "encode",
+    "decode",
+    "translate",
+    "convert"
+  ]
 }

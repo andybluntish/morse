@@ -6,6 +6,15 @@
     "Andy Bluntish <andy@bluntish.net>"
   ],
   "description": "Convert text to and from morse code",
+  "keywords": [
+    "morse code",
+    "morse",
+    "code",
+    "encode",
+    "decode",
+    "translate",
+    "convert"
+  ],
   "main": "lib/index.js",
   "license": "MIT",
   "ignore": [
