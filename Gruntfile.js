@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -32,7 +34,7 @@ module.exports = function(grunt) {
       all: {
         options:{
           port: 9000,
-          hostname: "0.0.0.0",
+          hostname: '0.0.0.0',
           base: '.',
           livereload: true,
           open: 'http://0.0.0.0:9000/examples/'
