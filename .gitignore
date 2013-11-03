@@ -25,3 +25,6 @@ coverage/
 *.sqlite
 *.sqlite3
 *.db
+
+node_modules
+npm-debug.log
