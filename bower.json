@@ -1,0 +1,18 @@
+{
+  "name": "morse",
+  "version": "0.1.0",
+  "homepage": "https://github.com/andybluntish/morse",
+  "authors": [
+    "Andy Bluntish <andy@bluntish.net>"
+  ],
+  "description": "Convert text to and from morse code",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
