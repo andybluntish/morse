@@ -1,27 +1,37 @@
-# Morse.js
+# morse.js
 
 Convert text to and from morse code.
 
 ## Usage
 
-Morse comes in two flavours, jQuery plugin or vanilla JavaScript.
+Simply call `encode` and pass in a selector to convert the contents of the selected elements to morse code.
 
-### jQuery
+```js
+morse.encode('.morse');
+```
 
-Call `morsify()` on a jQuery object to convert from text to Morse code.
 
-    $('.to-morse').morsify();
+```html
+<!-- Before -->
+<p>Here is some text in <span class="morse">morse code</span>.</p>
 
-Call `demorsify()` on a jQuery object to convert from Morse code to text.
+<!-- After -->
+<p>Here is some text in <span class="morse" data-original-value="morse code">-- --- .-. ... .  -.-. --- -.. .</span>.</p>
 
-    $('.from-morse').demorsify();
+```
 
-### JavaScript
+Decode works just the same.
 
-Call `Morse.encode()` and pass in a query selector (calls `document.querySelectorAll()` internally) to convert from text to Morse code.
+```js
+morse.decode('.morse');
+```
 
-    Morse.encode('.to-morse');
+```html
+<!-- Before -->
+<p>Here is some text in <span class="morse">-- --- .-. ... .  -.-. --- -.. .</span>.</p>
 
-Call `Morse.decode()` and pass in a query selector (calls `document.querySelectorAll()` internally) to convert from Morse code to text.
+<!-- After -->
+<p>Here is some text in <span class="morse">morse code</span>.</p>
+```
 
-    Morse.decode('.from-morse');
+We use `document.querySelectorAll()` internally, so any valid `querySelector` selector will work.
