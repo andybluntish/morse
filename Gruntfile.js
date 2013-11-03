@@ -46,13 +46,20 @@ module.exports = function(grunt) {
     },
 
     connect: {
-      all: {
+      options: {
+        port: 9000,
+        hostname: '0.0.0.0',
+        base: '.'
+      },
+      server: {
         options:{
-          port: 9000,
-          hostname: '0.0.0.0',
-          base: '.',
           livereload: true,
           open: 'http://0.0.0.0:9000/examples/'
+        }
+      },
+      test: {
+        options: {
+          livereload: false
         }
       }
     },
@@ -61,6 +68,15 @@ module.exports = function(grunt) {
       build: {
         src: 'build/<%= config.name %>.js',
         dest: 'build/<%= config.name %>.min.js'
+      }
+    },
+
+    mocha: {
+      all: {
+        options: {
+          run: true,
+          urls: ['http://0.0.0.0:9000/test/index.html']
+        }
       }
     }
 
@@ -71,6 +87,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-mocha');
 
   // Build
   grunt.registerTask('build', [
@@ -82,8 +99,15 @@ module.exports = function(grunt) {
   // Server
   grunt.registerTask('server', [
     'build',
-    'connect',
+    'connect:server',
     'watch'
+  ]);
+
+  // Test
+  grunt.registerTask('test', [
+    'build',
+    'connect:test',
+    'mocha'
   ]);
 
   // Default task.
