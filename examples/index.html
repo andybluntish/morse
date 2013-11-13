@@ -8,21 +8,25 @@
 
   <ol>
     <li>SOS (<span class="to-morse">SOS</span>)</li>
-    <li>SMS (<span class="to-morse">SMS</span>)</li>
-    <li>I have a ham radio (<span class="to-morse">I have a ham radio</span>)</li>
+    <li>I have a <b>ham</b> radio (<span class="to-morse">I have a <b>ham</b> radio</span>)</li>
   </ol>
 
   <ol>
     <li>... --- ... (<span class="from-morse">... --- ...</span>)</li>
-    <li>... -- ... (<span class="from-morse">... -- ...</span>)</li>
-    <li>.. .... .- ...- . .- .... .- -- .-. .- -.. .. --- (<span class="from-morse">..  .... .- ...- .  .-  .... .- --  .-. .- -.. .. ---</span>)</li>
+    <li>.. .... .- ...- . .- <b>.... .- --</b> .-. .- -.. .. --- (<span class="from-morse">..  .... .- ...- .  .- <b>.... .- --</b> .-. .- -.. .. ---</span>)</li>
   </ol>
-
 
   <script src="../build/morse.min.js"></script>
   <script>
-    morse.encode('.to-morse');
-    morse.decode('.from-morse');
+    // Strings
+    var romanStr = 'I have a ham radio',
+        morseStr = '..  .... .- ...- .  .-  .... .- --  .-. .- -.. .. ---';
+    console.log(morse.encode(romanStr));
+    console.log(morse.decode(morseStr));
+
+    // Elements
+    morse.encodeHTML('.to-morse');
+    morse.decodeHTML('.from-morse');
   </script>
 </body>
 </html>
